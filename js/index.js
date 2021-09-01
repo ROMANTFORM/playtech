@@ -9,7 +9,12 @@ const refs = {
 
     infoBtn: document.querySelector('.categories-card__btn'),
     hiddenText: document.querySelector('.hidden-wrap'),
+
+    containerCategories: document.querySelector('.wrapper-categories')
 };
+// refs.infoBtn.addEventListener('click', () => {
+//     console.log('click')
+// })
 
  const fetchData = (id, el) => {
   const data = fetch(`https://run.mocky.io/v3/${id}`)
@@ -17,28 +22,26 @@ const refs = {
             return res.json()
         })
       .then(data => {
+        //   console.log(data)
           data.map(({ image, title, description }) => {
-              console.log(image, title, description)
+              
               el.insertAdjacentHTML('beforeend', `
-    <div class="categories-card">
+            <div class="categories-card">
                 <img src=${image} alt=${title}  class="categories-img">
                 <button class="categories-card__btn" >&#8595</button>
                 <div class="hidden-wrap">
-                
-                    <p class="categories-card__text">${description}
-                    </p>
-                    <button class="hidden-wrap__btn">Go for it!</button>
+                    <p class="categories-card__text">${description}</p>
+                    <button id="1" class="hidden-wrap__btn">Go for it!</button>
                 </div>
-                <h3 class="categories-card__title">${data.title}</h3>      
+                <h3 class="categories-card__title">${title}</h3>      
             </div>`)
-          })  
-        });
+          });
+      });
 };
 
 
-
 refs.categoryPets.addEventListener('click', (evt) => {
-    console.log(evt.currentTarget)
+    // console.log(evt.currentTarget)
     fetchData(evt.currentTarget.id, evt.currentTarget);
 });
 
@@ -50,10 +53,11 @@ refs.categoryPlants.addEventListener('click', (evt) => {
     fetchData(evt.currentTarget.id, evt.currentTarget);
 });
 
+refs.containerCategories.addEventListener('click', (evt) => {
+    // console.log(evt.currentTarget)
+    // console.log(evt.target.classList.contains('categories-card__btn'))
+});
 
-// refs.infoBtn.addEventListener('click', () => {
-//     refs.hiddenText.classList.add('visible-wrap')
-// });
 
 
 
